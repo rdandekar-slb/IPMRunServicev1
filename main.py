@@ -23,10 +23,6 @@ def base_page():
 def submitfolders():
   received_data=request.form.to_dict();
   print(received_data)
-  # data = {"status": "success"}
-  # data.update(received_data)
-  # print(data)
-  # return data, 200
   response = app.response_class(
         response=json.dumps({"status":"success","code":0,"data":received_data}),
         status=200,

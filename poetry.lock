@@ -34,6 +34,31 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "azure-core"
+version = "1.22.0"
+description = "Microsoft Azure Core Library for Python"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+requests = ">=2.18.4"
+six = ">=1.11.0"
+
+[[package]]
+name = "azure-storage-blob"
+version = "12.9.0"
+description = "Microsoft Azure Blob Storage Client Library for Python"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+azure-core = ">=1.10.0,<2.0.0"
+cryptography = ">=2.1.4"
+msrest = ">=0.6.21"
+
+[[package]]
 name = "certifi"
 version = "2021.10.8"
 description = "Python package for providing Mozilla's CA Bundle."
@@ -312,7 +337,7 @@ watchdog = ["watchdog"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "53a07cec839daa71c4e228665c1bca611561d61f0dc614a2ab4723edf0a32fa3"
+content-hash = "aed7b665f1a3808a32bf37ccbd0d5680d2462a910904b3a01375b5cd97f39474"
 
 [metadata.files]
 adal = [
@@ -326,6 +351,14 @@ azure-batch = [
 azure-common = [
     {file = "azure-common-1.1.28.zip", hash = "sha256:4ac0cd3214e36b6a1b6a442686722a5d8cc449603aa833f3f0f40bda836704a3"},
     {file = "azure_common-1.1.28-py2.py3-none-any.whl", hash = "sha256:5c12d3dcf4ec20599ca6b0d3e09e86e146353d443e7fcc050c9a19c1f9df20ad"},
+]
+azure-core = [
+    {file = "azure-core-1.22.0.zip", hash = "sha256:582699ad709f9b29870db41364bc3e46eac2a02368e336dc779b87772a6a227e"},
+    {file = "azure_core-1.22.0-py3-none-any.whl", hash = "sha256:a342ebe9866e59a998e4098c65dd0b543cea06a9a5d4cc19c23a239c568bbb60"},
+]
+azure-storage-blob = [
+    {file = "azure-storage-blob-12.9.0.zip", hash = "sha256:cff66a115c73c90e496c8c8b3026898a3ce64100840276e9245434e28a864225"},
+    {file = "azure_storage_blob-12.9.0-py2.py3-none-any.whl", hash = "sha256:859195b4850dcfe77ffafbe53500abb74b001e52e77fe6d9492fa73639a22127"},
 ]
 certifi = [
     {file = "certifi-2021.10.8-py2.py3-none-any.whl", hash = "sha256:d62a0163eb4c2344ac042ab2bdf75399a71a2d8c7d47eac2e2ee91b9d6339569"},
