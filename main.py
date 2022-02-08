@@ -27,6 +27,9 @@ def submitfolders():
         response=json.dumps({"status":"success","code":0,"data":received_data}),
         status=200,
         mimetype='application/json')
+  #Upload file to azure blob storage
+  file_to_upload='Brine_MultipleComponent.zip'
+  azurebatch.az_upload(file_to_upload)
   return response
 
 

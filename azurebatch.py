@@ -297,7 +297,8 @@ def _read_stream_as_string(stream, encoding):
         output.close()
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
+def az_upload(filename):
 
     start_time = datetime.datetime.now().replace(microsecond=0)
     print('Sample start: {}'.format(start_time))
@@ -316,73 +317,78 @@ if __name__ == '__main__':
     # Use the blob client to create the containers in Azure Storage if they
     # don't yet exist.
     input_container_name = 'input-rrd'
-    try:
-        blob_service_client.create_container(input_container_name)
-    except ResourceExistsError:
-        pass
+    # try:
+    #     blob_service_client.create_container(input_container_name)
+    # except ResourceExistsError:
+    #     pass
 
     # The collection of data files that are to be processed by the tasks.
-    input_file_paths = [os.path.join(sys.path[0], 'taskdata0.txt'),
-                        os.path.join(sys.path[0], 'taskdata1.txt'),
-                        os.path.join(sys.path[0], 'taskdata2.txt')]
+    # input_file_paths = [os.path.join(sys.path[0], 'taskdata0.txt'),
+    #                     os.path.join(sys.path[0], 'taskdata1.txt'),
+    #                     os.path.join(sys.path[0], 'taskdata2.txt')]
+
+    input_file_paths = [os.path.join(sys.path[0] , filename)]
 
     # Upload the data files.
     input_files = [
         upload_file_to_container(blob_service_client, input_container_name, file_path)
         for file_path in input_file_paths]
 
+    for f in input_files:
+      print(f)
+
     # Create a Batch service client. We'll now be interacting with the Batch
     # service in addition to Storage
-    credentials = SharedKeyCredentials(config._BATCH_ACCOUNT_NAME,
-        config._BATCH_ACCOUNT_KEY)
+    # credentials = SharedKeyCredentials(config._BATCH_ACCOUNT_NAME,
+    #     config._BATCH_ACCOUNT_KEY)
 
-    batch_client = BatchServiceClient(
-        credentials,
-        batch_url=config._BATCH_ACCOUNT_URL)
+    # batch_client = BatchServiceClient(
+    #     credentials,
+    #     batch_url=config._BATCH_ACCOUNT_URL)
 
-    try:
-        # Create the pool that will contain the compute nodes that will execute the
-        # tasks.
-        # create_pool(batch_client, config._POOL_ID)
+    # try:
+    #     # Create the pool that will contain the compute nodes that will execute the
+    #     # tasks.
+    #     # create_pool(batch_client, config._POOL_ID)
 
-        # Create the job that will run the tasks.
-        create_job(batch_client, config._JOB_ID, config._POOL_ID)
+    #     # Create the job that will run the tasks.
+    #     create_job(batch_client, config._JOB_ID, config._POOL_ID)
 
-        # Add the tasks to the job.
-        add_tasks(batch_client, config._JOB_ID, input_files)
+    #     # Add the tasks to the job.
+    #     add_tasks(batch_client, config._JOB_ID, input_files)
 
-        # Pause execution until tasks reach Completed state.
-        wait_for_tasks_to_complete(batch_client,
-                                   config._JOB_ID,
-                                   datetime.timedelta(minutes=30))
+    #     # Pause execution until tasks reach Completed state.
+    #     wait_for_tasks_to_complete(batch_client,
+    #                                config._JOB_ID,
+    #                                datetime.timedelta(minutes=30))
 
-        print("  Success! All tasks reached the 'Completed' state within the "
-              "specified timeout period.")
+    #     print("  Success! All tasks reached the 'Completed' state within the "
+    #           "specified timeout period.")
 
-        # Print the stdout.txt and stderr.txt files for each task to the console
-        print_task_output(batch_client, config._JOB_ID)
+    #     # Print the stdout.txt and stderr.txt files for each task to the console
+    #     print_task_output(batch_client, config._JOB_ID)
 
-    except batchmodels.BatchErrorException as err:
-        print_batch_exception(err)
-        raise
+    # except batchmodels.BatchErrorException as err:
+    #     print_batch_exception(err)
+    #     raise
 
-    # Clean up storage resources
-    # print('Deleting container [{}]...'.format(input_container_name))
-    # blob_service_client.delete_container(input_container_name)
+    # # Clean up storage resources
+    # # print('Deleting container [{}]...'.format(input_container_name))
+    # # blob_service_client.delete_container(input_container_name)
 
-    # Print out some timing info
-    end_time = datetime.datetime.now().replace(microsecond=0)
-    print()
-    print('Sample end: {}'.format(end_time))
-    print('Elapsed time: {}'.format(end_time - start_time))
-    print()
+    # # Print out some timing info
+    # end_time = datetime.datetime.now().replace(microsecond=0)
+    # print()
+    # print('Sample end: {}'.format(end_time))
+    # print('Elapsed time: {}'.format(end_time - start_time))
+    # print()
 
-    # Clean up Batch resources (if the user so chooses).
-    # if query_yes_no('Delete job?') == 'yes':
-    #     batch_client.job.delete(config._JOB_ID)
+    # # Clean up Batch resources (if the user so chooses).
+    # # if query_yes_no('Delete job?') == 'yes':
+    # #     batch_client.job.delete(config._JOB_ID)
 
-    # if query_yes_no('Delete pool?') == 'yes':
-    #     batch_client.pool.delete(config._POOL_ID)
+    # # if query_yes_no('Delete pool?') == 'yes':
+    # #     batch_client.pool.delete(config._POOL_ID)
 
-    print()
-    input('Press ENTER to exit...')
+    # print()
+    # input('Press ENTER to exit...')
