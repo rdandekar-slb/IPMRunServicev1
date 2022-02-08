@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,json
+from flask import Flask,render_template,request,json,flash,redirect
 import random
 import os
 import azurebatch
@@ -31,6 +31,20 @@ def submitfolders():
   file_to_upload='Brine_MultipleComponent.zip'
   azurebatch.az_upload(file_to_upload)
   return response
+
+# post method with form and files
+@app.route('/getzipfiles', methods=(['POST']))
+def getzipfiles():
+  print(request)
+  if 'file' not in request.files:
+    print('No file part')
+    return redirect(request.url)
+  print('I am here')
+  print(request.files)
+  for f in request.files.keys():
+    print(f)
+  return render_template('monitor.html')
+  
 
 
 @app.route('/monitor')

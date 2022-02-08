@@ -56,8 +56,7 @@
 
 
   <div class="container">
-    <form action="getzipfiles" method="post" enctype="multipart/form-data" id="filesform" >
-    <table class="table table-borderless">
+    <table class="table">
       <thead>
         <tr>
           <th scope="col" >Select</th>
@@ -66,24 +65,20 @@
       </thead>
       <tbody>
         <tr>
-          <td scope="row"><input type="file" class="fileinput" id="folder1" style="width:100%" ></td>
+          <td scope="row"><input type="text" class="fileinput" id="folder1" style="width:100%" ></td>
           <!-- <td id="path1"></td> -->
         </tr>
         <tr>
-          <td scope="row"><input type="file" class="fileinput" id="folder2" style="width:100%" ></td>
+          <td scope="row"><input type="text" class="fileinput" id="folder2" style="width:100%" ></td>
           <!-- <td id="path2"></td> -->
         </tr>
         <tr>
-          <td scope="row"><input type="file" class="fileinput" id="folder3" style="width:100%" ></td>
+          <td scope="row"><input type="text" class="fileinput" id="folder3" style="width:100%" ></td>
           <!-- <td id="path3"></td> -->
         </tr>
       </tbody>
     </table>
-    <input type="submit" value="Submit">
-
-    </form>
-    <!-- <button type="button" class="btn btn-primary" id="submitfolders">Submit</button> -->
-    <!-- <button type="submit" form="filesform" value="Submit" class="btn btn-primary">Submit</button> -->
+    <button type="button" class="btn btn-primary" id="submitfolders">Submit</button>
   </div>
 </div>
 
