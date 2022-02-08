@@ -128,22 +128,18 @@
       retval += '</tbody>';
       return retval;
     }
-
+    
 
 
   $(document).ready(function(){
-    // console.log(usertoken);
     $("#tokensave").click(function(){
       usertoken=$("#token").val();
-      // console.log(usertoken);
     });
 
     $("#submitfolders").click(function(){
       let folders=getFolders();
-      // console.log;
+
       $.post('/submitfolders',folders,function(data,status){
-        // alert(status);
-        // alert(data);
         $("#result").html("<h2>Status :"+status+"</h2>");
         resultstable=makefolderstable(data);
         $("#result").append(resultstable);
